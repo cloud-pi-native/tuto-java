@@ -28,11 +28,13 @@ stages:
   - sign
 
 read_secret:
+  when: manual
   stage: read-secret
   extends:
     - .vault:read_secret
 
 package-app:
+  when: manual
   variables:
     MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
     MAVEN_CLI_OPTS: ""
@@ -46,6 +48,7 @@ package-app:
     - .java:build
 
 test-app:
+  when: manual
   variables:
     MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
     MAVEN_CLI_OPTS: ""
@@ -58,6 +61,7 @@ test-app:
     - .java:sonar
 
 docker-build-digest:
+  when: manual
   variables:
     WORKING_DIR: "."
     IMAGE_NAME: app
@@ -72,6 +76,7 @@ docker-build-digest:
       - digest.txt
 
 sign_image:
+  when: manual
   stage: sign
   variables:
     COSIGN_PASSWORD: $KEY_PASSWORD
