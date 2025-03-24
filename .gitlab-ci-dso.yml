@@ -27,11 +27,15 @@ stages:
   - docker-build
 
 read_secret:
+  only:
+    - web
   stage: read-secret
   extends:
     - .vault:read_secret
 
 package-app:
+  only:
+    - web
   variables:
     MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
     MAVEN_CLI_OPTS: ""
@@ -46,6 +50,8 @@ package-app:
 
 
 test-app:
+  only:
+    - web
   variables:
     MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
     MAVEN_CLI_OPTS: ""
@@ -58,6 +64,8 @@ test-app:
     - .java:sonar
 
 docker-build:
+  only:
+    - web
   variables:
     WORKING_DIR: "."
     IMAGE_NAME: java-demo
@@ -66,6 +74,8 @@ docker-build:
     - .kaniko:simple-build-push
 
 docker-build-2:
+  only:
+    - web
   variables:
     WORKING_DIR: "."
     IMAGE_NAME: javanaise-demo
