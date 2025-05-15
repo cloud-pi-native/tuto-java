@@ -357,7 +357,7 @@ docker-build:
 
 Une fois que ce fichier est créé et commit / push sur le repos git, retourner sur le projet gitlab *demo-java* puis dans le menu *build* -> *pipelines* puis cliquez sur le bouton *Run pipeline*
 
-Le pipeline cherche automatiquement le fichier *.gitlab-dso.yaml* à la racine du projet et lance le pipeline.
+Le pipeline cherche automatiquement le fichier *.gitlab-ci-dso.yml* à la racine du projet et lance le pipeline.
 
 ![build](img/build.png)
 
