@@ -1,6 +1,14 @@
-FROM bitnami/java:17
+# First stage: complete build environment
+FROM maven:3.9.7-eclipse-temurin-21 AS builder
+
+# add pom.xml and source code
+ADD ./pom.xml pom.xml
+ADD ./src src/
+RUN mvn clean package -Dmaven.test.skip=true
+
+FROM bitnamilegacy/java:17
 WORKDIR /app
-COPY target/*.jar app-java-forge-demo.jar
+COPY --from=builder target/*.jar /app/app.jar
 COPY src/main/resources/application.yml application.yml
 COPY start.sh start.sh
 ENTRYPOINT ["sh","start.sh"]

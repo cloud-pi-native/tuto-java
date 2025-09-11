@@ -3,7 +3,6 @@ include:
     file:
       - vault-ci.yml
       - kaniko-ci.yml
-      - java-mvn.yml
     ref: main
 
 # default:
@@ -22,7 +21,6 @@ variables:
 
 stages:
   - read-secret
-  - build-app
   - test-app
   - docker-build
 
@@ -33,32 +31,13 @@ read_secret:
   extends:
     - .vault:read_secret
 
-package-app:
-  only:
-    - web
-  variables:
-    MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-    MAVEN_CLI_OPTS: ""
-    MVN_CONFIG_FILE: $MVN_CONFIG
-    BUILD_IMAGE_NAME: maven:3.8-openjdk-17
-    WORKING_DIR: .
-    ARTEFACT_DIR: ./target/*.jar
-
-  stage: build-app
-  extends:
-    - .java:build
-
 
 test-app:
   only:
     - web
   variables:
-    MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-    MAVEN_CLI_OPTS: ""
-    MVN_CONFIG_FILE: $MVN_CONFIG
     BUILD_IMAGE_NAME: maven:3.8-openjdk-17
     WORKING_DIR: .
-
   stage: test-app
   extends:
     - .java:sonar
