@@ -1,5 +1,14 @@
-FROM bitnami/java:17
+# First stage: complete build environment
+FROM maven:3.9.7-eclipse-temurin-21 AS builder
+
+# add pom.xml and source code
+ADD ./pom.xml pom.xml
+ADD ./src src/
+RUN mvn clean package -Dmaven.test.skip=true
+
+FROM gcr.io/distroless/java21:nonroot
 WORKDIR /app
-COPY target/*.jar app-java-forge-demo.jar
-ENTRYPOINT ["java","-jar","app-java-forge-demo.jar"]
+COPY --from=builder target/*.jar /app/app.jar
+
+CMD ["-jar", "/app/app.jar"]
 EXPOSE 8080
