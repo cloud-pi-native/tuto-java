@@ -1,4 +1,4 @@
-FROM bitnami/java:17
+FROM bitnamilegacy/java:17
 WORKDIR /app
 COPY target/*.jar app-java-forge-demo.jar
 COPY src/main/resources/application.yml application.yml
