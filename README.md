@@ -76,6 +76,7 @@ include:
     file:
       - vault-ci.yml
       - kaniko-ci.yml
+      - java-mvn.yml
     ref: main
 ```
 
@@ -171,6 +172,7 @@ include:
     file:
       - vault-ci.yml
       - kaniko-ci.yml
+      - java-mvn.yml
     ref: main
 
 # default:
