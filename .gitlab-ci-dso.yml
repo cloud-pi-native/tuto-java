@@ -4,7 +4,7 @@ include:
       - vault-ci.yml
       - kaniko-ci.yml
     ref: main
-  - local: "./includes/java-mvn.yml"
+  - local: "/includes/java-mvn.yml"
 
 # default:
 #  tags:
