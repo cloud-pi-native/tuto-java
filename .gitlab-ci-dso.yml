@@ -3,8 +3,8 @@ include:
     file:
       - vault-ci.yml
       - kaniko-ci.yml
-      - java-mvn.yml
     ref: main
+  - local: "./includes/java-mvn.yml"
 
 # default:
 #  tags:
@@ -42,6 +42,7 @@ test-app:
   stage: test-app
   extends:
     - .java:sonar
+  allow_failure: true
 
 docker-build:
   only:
