@@ -77,7 +77,7 @@ include:
       - vault-ci.yml
       - kaniko-ci.yml
     ref: main
-  - local: "./includes/java-mvn.yml"
+  - local: "/includes/java-mvn.yml"
 ```
 
 Cette partie permet de charger les taches pré-définies et pré-paramétrée pour s'exécuter dans CPiN. Pour plus d'information sur le catalogue, voir le repo [dédié](https://github.com/cloud-pi-native/gitlab-ci-catalog)
@@ -174,7 +174,7 @@ include:
       - vault-ci.yml
       - kaniko-ci.yml
     ref: main
-  - local: "./includes/java-mvn.yml"
+  - local: "/includes/java-mvn.yml"
 
 # default:
 #  tags:
