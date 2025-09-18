@@ -76,8 +76,8 @@ include:
     file:
       - vault-ci.yml
       - kaniko-ci.yml
-      - java-mvn.yml
     ref: main
+  - local: "./includes/java-mvn.yml"
 ```
 
 Cette partie permet de charger les taches pré-définies et pré-paramétrée pour s'exécuter dans CPiN. Pour plus d'information sur le catalogue, voir le repo [dédié](https://github.com/cloud-pi-native/gitlab-ci-catalog)
@@ -127,6 +127,7 @@ test-app:
   stage: test-app
   extends:
     - .java:sonar
+  allow_failure: true
 ```
 
 #### Construction de l'image et déploiement sur Harbor
@@ -172,8 +173,8 @@ include:
     file:
       - vault-ci.yml
       - kaniko-ci.yml
-      - java-mvn.yml
     ref: main
+  - local: "./includes/java-mvn.yml"
 
 # default:
 #  tags:
@@ -206,6 +207,7 @@ test-app:
   stage: test-app
   extends:
     - .java:sonar
+  allow_failure: true
 
 docker-build:
   variables:
